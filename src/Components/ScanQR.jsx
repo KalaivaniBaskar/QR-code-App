@@ -6,6 +6,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import BasicModal from './BasicModal';
+import axios from 'axios';
 
 const ScanQR = () => {
     const [value, setValue] = useState("");
@@ -60,30 +61,44 @@ const ScanQR = () => {
             formData.append('file', file);
             setImgURL( window.URL.createObjectURL(file))
             // POST request for file parameter
-            await fetch("http://api.qrserver.com/v1/read-qr-code/", 
-            {   
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                    'Access-Control-Allow-Origin': '*',
-                    'Accept': '*/*'
-                },
-                'method': 'POST', 
-                body: formData
-            }).then(res => res.json()).then(result => {
-                console.log(result);
-                const txt = result[0].symbol[0].data;
+            try{
+            const response = await axios.post("http://api.qrserver.com/v1/read-qr-code/", formData)
+            console.log(response)
+            if(response.status === 200) {
+                const txt = response.data[0].symbol[0].data;
                 if(!txt) {
-                    setErr(result[0].symbol[0].error);
-                    handleClose();
-                    return;
-                 }
-                setQRTxt(txt);
-                handleClose();
-            }).catch((err) => {
-                console.log(err)
+                            setErr(response.data[0].symbol[0].error);
+                            handleClose();
+                            return;
+                         }
+                        setQRTxt(txt);
+                        handleClose();
+            }
+           }
+           catch(err){
+            console.log(err)
                 setErr("Couldn't scan QR Code");
                 handleClose();
-            });
+           }
+            // await fetch("http://api.qrserver.com/v1/read-qr-code/", 
+            // {   
+            //     'method': 'POST', 
+            //     body: formData
+            // }).then(res => res.json()).then(result => {
+            //     console.log(result);
+            //     const txt = result[0].symbol[0].data;
+            //     if(!txt) {
+            //         setErr(result[0].symbol[0].error);
+            //         handleClose();
+            //         return;
+            //      }
+            //     setQRTxt(txt);
+            //     handleClose();
+            // }).catch((err) => {
+            //     console.log(err)
+            //     setErr("Couldn't scan QR Code");
+            //     handleClose();
+            // });
         }
 
         if(value === 'url') {
