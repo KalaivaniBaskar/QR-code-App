@@ -1,3 +1,8 @@
+Sample URLs that work, that the qr server is able get access
+https://cdn.ttgtmedia.com/rms/misc/qr_code_barcode.jpg
+
+https://www.investopedia.com/thmb/hJrIBjjMBGfx0oa_bHAgZ9AWyn0=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/qr-code-bc94057f452f4806af70fd34540f72ad.png
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
