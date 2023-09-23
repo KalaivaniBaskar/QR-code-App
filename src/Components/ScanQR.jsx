@@ -62,7 +62,7 @@ const ScanQR = () => {
             setImgURL( window.URL.createObjectURL(file))
             // POST request for file parameter
             try{
-            const response = await axios.post("http://api.qrserver.com/v1/read-qr-code/", formData)
+            const response = await axios.post("https://api.qrserver.com/v1/read-qr-code/", formData)
             console.log(response)
             if(response.status === 200) {
                 const txt = response.data[0].symbol[0].data;
