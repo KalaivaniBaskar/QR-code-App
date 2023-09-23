@@ -60,8 +60,15 @@ const ScanQR = () => {
             formData.append('file', file);
             setImgURL( window.URL.createObjectURL(file))
             // POST request for file parameter
-            await fetch("http://api.qrserver.com/v1/read-qr-code/", {
-                method: 'POST', body: formData
+            await fetch("http://api.qrserver.com/v1/read-qr-code/", 
+            {   
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                    'Access-Control-Allow-Origin': '*',
+                    'Accept': '*/*'
+                },
+                'method': 'POST', 
+                body: formData
             }).then(res => res.json()).then(result => {
                 //console.log(result);
                 const txt = result[0].symbol[0].data;
