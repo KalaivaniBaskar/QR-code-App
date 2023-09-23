@@ -63,7 +63,7 @@ const ScanQR = () => {
             // POST request for file parameter
             try{
             const response = await axios.post("https://api.qrserver.com/v1/read-qr-code/", formData)
-            console.log(response)
+            //console.log(response)
             if(response.status === 200) {
                 const txt = response.data[0].symbol[0].data;
                 if(!txt) {
@@ -80,7 +80,9 @@ const ScanQR = () => {
                 setErr("Couldn't scan QR Code");
                 handleClose();
            }
-            // await fetch("http://api.qrserver.com/v1/read-qr-code/", 
+
+           // using a simple Fetch - be sure to use https for deployment
+            // await fetch("https://api.qrserver.com/v1/read-qr-code/", 
             // {   
             //     'method': 'POST', 
             //     body: formData
