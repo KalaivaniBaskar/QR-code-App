@@ -70,7 +70,7 @@ const ScanQR = () => {
                 'method': 'POST', 
                 body: formData
             }).then(res => res.json()).then(result => {
-                //console.log(result);
+                console.log(result);
                 const txt = result[0].symbol[0].data;
                 if(!txt) {
                     setErr(result[0].symbol[0].error);
